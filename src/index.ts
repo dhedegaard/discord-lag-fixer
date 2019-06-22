@@ -3,9 +3,9 @@ config();
 import * as Discord from "discord.js";
 
 const REGIONS_PREFIX = process.env.REGIONS_PREFIX;
-if (typeof REGIONS_PREFIX !== 'string' || REGIONS_PREFIX.length < 1){
- throw new Error('Missing REGIONS_PREFIX setting')
-} ))
+if (typeof REGIONS_PREFIX !== "string" || REGIONS_PREFIX.length < 1) {
+  throw new Error("Missing REGIONS_PREFIX setting");
+}
 
 let lastChange = new Date(0);
 
@@ -53,7 +53,7 @@ const main = async () => {
 
     // Determine the new region to go to.
     const newRegions = regions.filter(e => e.id !== currentRegion.id);
-    const newRegion = newRegions[Math.floor(Math.random() * newRegions.length)]
+    const newRegion = newRegions[Math.floor(Math.random() * newRegions.length)];
     if (newRegion == null) {
       throw new Error(`No new region to go to: ${JSON.stringify(regions)}`);
     }
