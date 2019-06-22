@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
-    "@types/node": "^12.0.8"
+    "@types/node": "<11"
   },
   "scripts": {
     "start": "ts-node src/index.ts"
