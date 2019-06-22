@@ -34,7 +34,7 @@ const main = async () => {
     // Check if we should ignore the message.
     if (
       message.author.bot ||
-      !/^.*fix +lag.*$/i.test(message.content.toLowerCase())
+      !/^.*(fix +lag|lag +fix).*$/i.test(message.content.toLowerCase())
     ) {
       return;
     }
