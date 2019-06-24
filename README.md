@@ -1,5 +1,7 @@
 # Discord lag fixer
 
+[![Build Status](https://dev.azure.com/dhedegaard/discord-lag-fixer/_apis/build/status/dhedegaard.discord-lag-fixer?branchName=master)](https://dev.azure.com/dhedegaard/discord-lag-fixer/_build/latest?definitionId=7&branchName=master)
+
 A simple bot for fixing discord voice lag issues.
 
 Basically, add the bot to your server and write in one of your guild-based text channels: "fix lag" og "lag fix".
