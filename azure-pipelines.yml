@@ -19,4 +19,13 @@ steps:
     yarn
   displayName: 'Install dependencies'
 
-
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'dennis@ymir'
+    runOptions: 'commands'
+    commands: 'sh -e -x -c "\
+        cd discord-lag-fixer && \
+        git pull --ff-only && \
+        docker-compose pull && \
+        docker-compose up --build -d
+      "'
