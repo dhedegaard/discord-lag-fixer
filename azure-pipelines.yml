@@ -16,6 +16,9 @@ steps:
 
 - task: SSH@0
   displayName: 'Deploy new container'
+  env:
+    TOKEN: ${TOKEN}
+    REGIONS_PREFIX: ${REGIONS_PREFIX}
   inputs:
     sshEndpoint: 'dennis@ymir'
     runOptions: 'inline'
