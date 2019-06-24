@@ -19,6 +19,7 @@ steps:
   inputs:
     sshEndpoint: 'dennis@ymir'
     runOptions: 'inline'
+    failOnStdErr: false
     inline: 'bash -e -x -c "
       cd discord-lag-fixer &&
       git pull -q --ff-only &&
