@@ -21,8 +21,6 @@ steps:
     sshEndpoint: 'dennis@ymir'
     runOptions: 'commands'
     commands: 'bash -e -x -c "
-        cd discord-lag-fixer && 
-        git pull --ff-only && 
-        docker-compose pull && 
-        docker-compose up --build -d
+        docker pull dhedegaard/discord-lag-fixer &&
+        docker stack deploy -c discord-lag-fixer/docker-compose.yml discord-lag-fixer
       "'
