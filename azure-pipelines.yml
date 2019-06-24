@@ -23,9 +23,10 @@ steps:
     sshEndpoint: 'dennis@ymir'
     runOptions: 'inline'
     failOnStdErr: false
-    inline: 'bash -e -x -c "
-      cd discord-lag-fixer &&
-      git pull -q --ff-only &&
-      docker pull dhedegaard/discord-lag-fixer &&
-      env TOKEN=${TOKEN} REGIONS_PREFIX=${REGIONS_PREFIX} docker stack deploy --prune -c docker-compose.yml discord-lag-fixer
-    "'
+    inline: |
+      bash -e -x -c "
+        cd discord-lag-fixer &&
+        git pull -q --ff-only &&
+        docker pull dhedegaard/discord-lag-fixer &&
+        env TOKEN=${TOKEN} REGIONS_PREFIX=${REGIONS_PREFIX} docker stack deploy --prune -c docker-compose.yml discord-lag-fixer
+      "
