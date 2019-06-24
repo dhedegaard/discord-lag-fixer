@@ -10,7 +10,7 @@ steps:
   displayName: 'Build and push docker-image'
   inputs:
     containerRegistry: 'dockerhub'
-    repository: 'discord-lag-fixer'
+    repository: 'dhedegaard/discord-lag-fixer'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
 
