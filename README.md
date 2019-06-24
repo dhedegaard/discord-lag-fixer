@@ -10,6 +10,14 @@ Take a look in the `.env` file, for the various configuration options.
 
 ## How to run it
 
+**Using docker:**
+
+1. Pull the docker image (`dhedegaard/discord-lag-fixer`).
+1. Run it with a `TOKEN` and `REGIONS_PREFIX` env variable, ie:\
+   `docker run -e TOKEN=some-token -e REGIONS_PREFIX=some-prefix dhedegaard/discord-lag-fixer`
+
+**Outside docker:**
+
 1. Make sure you have node 10+ installed.
 1. Clone the project
 1. Install dependencies\
