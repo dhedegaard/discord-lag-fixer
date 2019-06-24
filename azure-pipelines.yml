@@ -16,7 +16,6 @@ steps:
 
 - task: SSH@0
   displayName: 'Deploy new container'
-  enabled: 'false' 
   inputs:
     sshEndpoint: 'dennis@ymir'
     runOptions: 'commands'
