@@ -5,7 +5,18 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+
+- task: Docker@2
+  displayName: 'Build and push docker-image'
+  inputs:
+    containerRegistry: 'dockerhub'
+    repository: 'discord-lag-fixer'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+
 - task: SSH@0
+  displayName: 'Deploy new container'
+  enabled: 'false' 
   inputs:
     sshEndpoint: 'dennis@ymir'
     runOptions: 'commands'
