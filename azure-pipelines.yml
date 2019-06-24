@@ -9,9 +9,9 @@ steps:
   inputs:
     sshEndpoint: 'dennis@ymir'
     runOptions: 'commands'
-    commands: 'bash -e -x -c "\
-        cd discord-lag-fixer && \
-        git pull --ff-only && \
-        docker-compose pull && \
+    commands: 'bash -e -x -c "\\
+        cd discord-lag-fixer && \\
+        git pull --ff-only && \\
+        docker-compose pull && \\
         docker-compose up --build -d
       "'
