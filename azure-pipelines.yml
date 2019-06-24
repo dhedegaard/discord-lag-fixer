@@ -19,6 +19,7 @@ steps:
   env:
     TOKEN: ${TOKEN}
     REGIONS_PREFIX: ${REGIONS_PREFIX}
+  timeoutInMinutes: 10
   inputs:
     sshEndpoint: 'dennis@ymir'
     runOptions: 'inline'
@@ -28,5 +29,5 @@ steps:
         cd discord-lag-fixer &&
         git pull -q --ff-only &&
         docker pull dhedegaard/discord-lag-fixer &&
-        env TOKEN=${TOKEN} REGIONS_PREFIX=${REGIONS_PREFIX} docker stack deploy --prune -c docker-compose.yml discord-lag-fixer
+        docker stack deploy --prune -c docker-compose.yml discord-lag-fixer
       "
