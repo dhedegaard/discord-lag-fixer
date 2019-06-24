@@ -16,16 +16,13 @@ steps:
 
 - task: SSH@0
   displayName: 'Deploy new container'
-  env:
-    TOKEN: ${TOKEN}
-    REGIONS_PREFIX: ${REGIONS_PREFIX}
   timeoutInMinutes: 10
   inputs:
     sshEndpoint: 'dennis@ymir'
     runOptions: 'inline'
     failOnStdErr: false
     inline: |
-      TOKEN=${TOKEN} REGIONS_PREFIX=${REGIONS_PREFIX} bash -e -x -c "
+      bash -e -x -c "
         cd discord-lag-fixer &&
         git pull -q --ff-only &&
         docker pull dhedegaard/discord-lag-fixer &&
