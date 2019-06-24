@@ -25,7 +25,7 @@ steps:
     runOptions: 'inline'
     failOnStdErr: false
     inline: |
-      bash -e -x -c "
+      TOKEN=${TOKEN} REGIONS_PREFIX=${REGIONS_PREFIX} bash -e -x -c "
         cd discord-lag-fixer &&
         git pull -q --ff-only &&
         docker pull dhedegaard/discord-lag-fixer &&
