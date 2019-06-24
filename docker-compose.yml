@@ -3,6 +3,5 @@ version: "3"
 services:
   bot:
     image: dhedegaard/discord-lag-fixer
-    environment:
-      - REGIONS_PREFIX=${REGIONS_PREFIX}
-      - TOKEN=${TOKEN}
+    env_file:
+      - .env
