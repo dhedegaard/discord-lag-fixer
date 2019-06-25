@@ -16,7 +16,10 @@ const log = (...args: any[]) => {
 const main = async () => {
   const client = new Discord.Client();
   await client.login(process.env.TOKEN);
-  client.user.setActivity('type "fix lag" to fix lag');
+  await client.user.setActivity('for "fix lag" in chat', {
+    type: "WATCHING",
+    url: "https://github.com/dhedegaard/discord-lag-fixer"
+  });
   log("Logged in successfully");
   log("");
 
@@ -69,6 +72,11 @@ const main = async () => {
     const newRegionLabel = `${newRegion.name} (${newRegion.id})`;
     message.reply(
       `Moved from **${currentRegionLabel}** to **${newRegionLabel}**`
+    );
+    log(
+      `Moved guild (${
+        message.guild.name
+      }) from ${currentRegionLabel} to ${newRegionLabel}`
     );
     lastChange = new Date();
   });
