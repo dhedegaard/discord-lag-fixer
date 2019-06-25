@@ -37,8 +37,9 @@ const main = async () => {
   client.on("message", async message => {
     // Check if we should ignore the message.
     if (
-      message.author.bot ||
-      !/^.*(fix +lag|lag +fix).*$/i.test(message.content.toLowerCase())
+      message.author.bot || // ignore bots
+      !/^.*(fix +lag|lag +fix).*$/i.test(message.content.toLowerCase()) ||
+      message.guild == null // ignore DMs
     ) {
       return;
     }
