@@ -16,6 +16,7 @@ const log = (...args: any[]) => {
 const main = async () => {
   const client = new Discord.Client();
   await client.login(process.env.TOKEN);
+  client.user.setActivity('type "fix lag" to fix lag');
   log("Logged in successfully");
   log("");
 
