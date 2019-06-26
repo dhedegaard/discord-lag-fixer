@@ -16,10 +16,6 @@ const log = (...args: any[]) => {
 const main = async () => {
   const client = new Discord.Client();
   await client.login(process.env.TOKEN);
-  await client.user.setActivity('for "fix lag" in chat', {
-    type: "WATCHING",
-    url: "https://github.com/dhedegaard/discord-lag-fixer"
-  });
   log("Logged in successfully");
   log("");
 
@@ -29,9 +25,22 @@ const main = async () => {
   client.guilds.forEach(guild => log("-", guild.name, `(${guild.id})`));
   log("");
 
+  const setActivity = () =>
+    client.user.setActivity('for "fix lag" in chat', {
+      type: "WATCHING",
+      url: "https://github.com/dhedegaard/discord-lag-fixer"
+    });
+
   // Log various interesting events.
   client.on("disconnect", () => log("Disconnected"));
   client.on("reconnecting", () => log("Reconnecting"));
+
+  // Set the activity now and whenever we're ready after a reconnect.
+  setActivity();
+  client.on("resume", () => {
+    log("resume happened, setting activity again");
+    setActivity();
+  });
 
   // Handle messages.
   client.on("message", async message => {
