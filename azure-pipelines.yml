@@ -24,7 +24,7 @@ steps:
     inline: |
       bash -e -x -c "
         cd discord-lag-fixer &&
-        git pull -q --ff-only &&
+        git pull --ff-only &&
         docker pull dhedegaard/discord-lag-fixer &&
         docker stack deploy --prune -c docker-compose.yml discord-lag-fixer
       "
