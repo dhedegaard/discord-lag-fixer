@@ -11,6 +11,7 @@ steps:
   inputs:
     containerRegistry: 'dockerhub'
     repository: 'dhedegaard/discord-lag-fixer'
+    tags: 'latest'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
 
