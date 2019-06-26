@@ -2,6 +2,6 @@ version: "3"
 
 services:
   bot:
-    image: dhedegaard/discord-lag-fixer
+    image: dhedegaard/discord-lag-fixer:latest
     env_file:
       - .env
