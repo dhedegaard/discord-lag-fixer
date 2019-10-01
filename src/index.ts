@@ -61,6 +61,7 @@ const main = async () => {
       message.reply("Not so fast :)");
       return;
     }
+    lastChange = new Date();
 
     // Fetch the current voice regions and determine the current one.
     const regions = (await message.guild.fetchVoiceRegions())
@@ -89,7 +90,6 @@ const main = async () => {
     log(
       `Moved guild (${message.guild.name}) from ${currentRegionLabel} to ${newRegionLabel}`
     );
-    lastChange = new Date();
   });
 };
 
