@@ -14,6 +14,9 @@ const log = (...args: any[]) => {
 };
 
 const main = async () => {
+  if (process.env.TOKEN === "") {
+    throw new Error("No TOKEN set in env");
+  }
   const client = new Discord.Client();
   await client.login(process.env.TOKEN);
   log("Logged in successfully");
@@ -84,9 +87,7 @@ const main = async () => {
       `Moved from **${currentRegionLabel}** to **${newRegionLabel}**`
     );
     log(
-      `Moved guild (${
-        message.guild.name
-      }) from ${currentRegionLabel} to ${newRegionLabel}`
+      `Moved guild (${message.guild.name}) from ${currentRegionLabel} to ${newRegionLabel}`
     );
     lastChange = new Date();
   });
