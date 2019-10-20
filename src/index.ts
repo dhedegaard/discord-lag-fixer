@@ -64,13 +64,20 @@ const main = async () => {
     lastChange = new Date();
 
     // Fetch the current voice regions and determine the current one.
-    const regions = (await message.guild.fetchVoiceRegions())
-      .filter(e => e.id.startsWith(REGIONS_PREFIX))
-      .map(e => e); // Make sure we have an array.
-    const currentRegion = regions.find(e => e.id === message.guild.region);
+    const regions = (await message.guild.fetchVoiceRegions()).map(e => e); // Make sure we have an array.
+    const currentRegion: Discord.VoiceRegion | undefined = regions.find(
+      e => e.id === message.guild.region
+    );
 
     // Determine the new region to go to.
-    const newRegions = regions.filter(e => e.id !== currentRegion.id);
+    const newRegions = regions.filter(e =>
+      currentRegion == null
+        ? !e.deprecated
+        : !e.deprecated &&
+          // Go back and forth between optimal regions.
+          currentRegion.optimal !== e.optimal &&
+          e.id !== currentRegion.id
+    );
     const newRegion = newRegions[Math.floor(Math.random() * newRegions.length)];
     if (newRegion == null) {
       throw new Error(`No new region to go to: ${JSON.stringify(regions)}`);
