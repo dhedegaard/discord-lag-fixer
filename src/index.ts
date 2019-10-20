@@ -2,11 +2,6 @@ import { config } from "dotenv";
 config();
 import * as Discord from "discord.js";
 
-const REGIONS_PREFIX = process.env.REGIONS_PREFIX;
-if (typeof REGIONS_PREFIX !== "string" || REGIONS_PREFIX.length < 1) {
-  throw new Error("Missing REGIONS_PREFIX setting");
-}
-
 let lastChange = new Date(0);
 
 const log = (...args: any[]) => {
