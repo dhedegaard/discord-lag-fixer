@@ -1,6 +1,7 @@
 # Discord lag fixer
 
-[![Build Status](https://dev.azure.com/dhedegaard/discord-lag-fixer/_apis/build/status/dhedegaard.discord-lag-fixer?branchName=master)](https://dev.azure.com/dhedegaard/discord-lag-fixer/_build/latest?definitionId=7&branchName=master)
+[![Docker](https://github.com/dhedegaard/discord-lag-fixer/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/dhedegaard/discord-lag-fixer/actions/workflows/docker-publish.yml)
+[![Node.js CI](https://github.com/dhedegaard/discord-lag-fixer/actions/workflows/node.js.yml/badge.svg)](https://github.com/dhedegaard/discord-lag-fixer/actions/workflows/node.js.yml)
 
 A simple bot for fixing discord voice lag issues.
 
