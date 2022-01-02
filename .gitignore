@@ -60,3 +60,4 @@ htmlcov
 node_modules
 
 .vscode
+yarn*.log

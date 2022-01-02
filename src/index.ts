@@ -12,7 +12,9 @@ const main = async () => {
   if (process.env.TOKEN === "") {
     throw new Error("No TOKEN set in env");
   }
-  const client = new Discord.Client();
+  const client = new Discord.Client({
+    intents: ["GUILDS", "GUILD_MESSAGES"],
+  });
   await client.login(process.env.TOKEN);
   log("Logged in successfully");
   log("");
@@ -20,13 +22,17 @@ const main = async () => {
   // List the current guilds.
   log("Current list of guilds:");
   log("");
-  client.guilds.forEach(guild => log("-", guild.name, `(${guild.id})`));
+  client.guilds
+    .fetch()
+    .then((guilds) =>
+      guilds.forEach((guild) => log("-", guild.name, `(${guild.id})`))
+    );
   log("");
 
   const setActivity = () =>
-    client.user.setActivity('for "fix lag" in chat', {
+    client.user?.setActivity('for "fix lag" in chat', {
       type: "WATCHING",
-      url: "https://github.com/dhedegaard/discord-lag-fixer"
+      url: "https://github.com/dhedegaard/discord-lag-fixer",
     });
 
   // Log various interesting events.
@@ -41,7 +47,7 @@ const main = async () => {
   });
 
   // Handle messages.
-  client.on("message", async message => {
+  client.on("messageCreate", async (message) => {
     // Check if we should ignore the message.
     if (
       message.author.bot || // ignore bots
@@ -59,13 +65,20 @@ const main = async () => {
     lastChange = new Date();
 
     // Fetch the current voice regions and determine the current one.
-    const regions = (await message.guild.fetchVoiceRegions()).map(e => e); // Make sure we have an array.
-    const currentRegion: Discord.VoiceRegion | undefined = regions.find(
-      e => e.id === message.guild.region
+    const regions = await client
+      .fetchVoiceRegions()
+      .then((e) => e.map((f) => f));
+    // @ts-expect-error
+    const voiceChannels: Discord.BaseGuildVoiceChannel[] =
+      await message.guild.channels
+        .fetch()
+        .then((e) => Array.from(e.filter((f) => f.isVoice()).values()));
+    const currentRegion: Discord.VoiceRegion | undefined = regions.find((r) =>
+      voiceChannels.some((c) => regions.some((r) => r.id === c.rtcRegion))
     );
 
     // Determine the new region to go to.
-    const newRegions = regions.filter(e =>
+    const newRegions = regions.filter((e) =>
       currentRegion == null
         ? !e.deprecated
         : !e.deprecated &&
@@ -74,29 +87,31 @@ const main = async () => {
           e.id !== currentRegion.id
     );
     const newRegion = newRegions[Math.floor(Math.random() * newRegions.length)];
-    if (newRegion == null) {
-      throw new Error(`No new region to go to: ${JSON.stringify(regions)}`);
-    }
     // Change the voice region.
-    message.guild.setRegion(newRegion.id);
+    await Promise.all(
+      voiceChannels.map((vc) => vc.setRTCRegion(newRegion?.id ?? ""))
+    );
 
     // Notify the caller, and update the timestamp.
     const currentRegionLabel =
       currentRegion != null
         ? `${currentRegion.name} (${currentRegion.id})`
-        : message.guild.region;
-    const newRegionLabel = `${newRegion.name} (${newRegion.id})`;
+        : "Automatic";
+    const newRegionLabel =
+      newRegion == null
+        ? "Automatic"
+        : `${newRegion.name ?? null} (${newRegion.id})`;
     message.reply(
-      `Moved from **${currentRegionLabel}** to **${newRegionLabel}**`
+      `Moved **${voiceChannels.length}** voice channel(s) from **${currentRegionLabel}** to **${newRegionLabel}**`
     );
     log(
-      `Moved guild (${message.guild.name}) from ${currentRegionLabel} to ${newRegionLabel}`
+      `Moved guild (${message.guild.name}) channelcount **${voiceChannels.length}** from ${currentRegionLabel} to ${newRegionLabel}`
     );
   });
 };
 
 if (require.main === module) {
-  main().catch(error => {
+  main().catch((error) => {
     console.error(error);
     process.exit(1);
   });

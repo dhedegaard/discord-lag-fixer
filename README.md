@@ -33,4 +33,4 @@ The "Manage server" permission is required (which is why you probably want to ho
 
 In any case, you may add the bot by going here:
 
-<https://discordapp.com/api/oauth2/authorize?client_id=591345636180230145&scope=bot&permissions=32>
+<https://discordapp.com/api/oauth2/authorize?client_id=591345636180230145&scope=bot&permissions=1072>
