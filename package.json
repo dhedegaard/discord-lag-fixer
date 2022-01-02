@@ -15,6 +15,7 @@
     "@types/node": "16"
   },
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "typecheck": "npx tsc --noemit"
   }
 }
