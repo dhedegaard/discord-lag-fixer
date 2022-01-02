@@ -15,7 +15,7 @@ Take a look in the `.env` file, for the various configuration options.
 
 1. Pull the docker image (`dhedegaard/discord-lag-fixer`).
 1. Run it with a `TOKEN` and `REGIONS_PREFIX` env variable, ie:\
-   `docker run -e TOKEN=some-token ghcr.io/dhedegaard/discord-lag-fixer`
+   `docker run -e TOKEN=some-token ghcr.io/dhedegaard/discord-lag-fixer:master`
 
 **Outside docker:**
 
